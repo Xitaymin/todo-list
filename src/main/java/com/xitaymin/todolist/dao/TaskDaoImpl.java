@@ -23,8 +23,7 @@ public class TaskDaoImpl implements TaskDao {
 
     public TaskDaoImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.taskInsert = new SimpleJdbcInsert(jdbcTemplate)
-                .withTableName("tasks")
+        this.taskInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("tasks")
                 .usingGeneratedKeyColumns("id");
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
@@ -42,7 +41,8 @@ public class TaskDaoImpl implements TaskDao {
             task.setId(newKey.intValue());
             return task;
         } else {
-            int affected = namedParameterJdbcTemplate.update("UPDATE tasks SET text=:text WHERE id=:id", parameterSource);
+            int affected = namedParameterJdbcTemplate.update("UPDATE tasks SET text=:text WHERE id=:id",
+                    parameterSource);
             if (affected == 0) {
                 throw new EntityNotFoundException(String.format(TASK_NOT_FOUND, task.getId()));
             }
@@ -52,13 +52,7 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public Collection<Task> findAll() {
-//        return jdbcTemplate.query("SELECT * FROM tasks ORDER BY id", (rs, rowNum) -> {
-//            Task task = new Task();
-//            task.setId(rs.getInt("id"));
-//            task.setText(rs.getString("text"));
-//            return task;
-//        });
-        return jdbcTemplate.query("SELECT * FROM tasks",ROW_MAPPER);
+        return jdbcTemplate.query("SELECT * FROM tasks", ROW_MAPPER);
     }
 
     @Override
