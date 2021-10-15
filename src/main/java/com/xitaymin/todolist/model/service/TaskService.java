@@ -1,4 +1,4 @@
-package com.xitaymin.todolist.service;
+package com.xitaymin.todolist.model.service;
 
 import com.xitaymin.todolist.entity.Task;
 

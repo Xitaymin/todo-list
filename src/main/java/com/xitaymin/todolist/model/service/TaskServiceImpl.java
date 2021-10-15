@@ -1,8 +1,8 @@
-package com.xitaymin.todolist.service;
+package com.xitaymin.todolist.model.service;
 
 import com.xitaymin.todolist.dao.TaskDao;
 import com.xitaymin.todolist.entity.Task;
-import com.xitaymin.todolist.exceptions.EntityNotFoundException;
+import com.xitaymin.todolist.model.exceptions.NotFoundResourceException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -30,7 +30,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteTask(Integer id) {
-        if(id==null){taskDao.deleteAll();}
-        else if(!taskDao.deleteById(id)) throw new EntityNotFoundException(String.format(TASK_NOT_FOUND,id));
+        if (id == null) {
+            taskDao.deleteAll();
+        } else if (!taskDao.deleteById(id)) throw new NotFoundResourceException(String.format(TASK_NOT_FOUND, id));
     }
 }
