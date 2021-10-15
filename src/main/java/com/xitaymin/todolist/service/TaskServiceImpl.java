@@ -9,7 +9,12 @@ import java.util.Collection;
 
 @Service
 public class TaskServiceImpl implements TaskService {
-    private static final String TASK_NOT_FOUND = "Task with id = %s wasn't found.";
+    @Override
+    public void deleteAll() {
+
+    }
+
+    public static final String TASK_NOT_FOUND = "Task with id = %s wasn't found.";
 
     public TaskServiceImpl(TaskDao taskDao) {
         this.taskDao = taskDao;
@@ -29,7 +34,6 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteTask(Integer id) {
-
         if(!taskDao.deleteById(id)) throw new EntityNotFoundException(String.format(TASK_NOT_FOUND,id));
     }
 }

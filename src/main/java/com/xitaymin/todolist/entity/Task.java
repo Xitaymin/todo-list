@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 public class Task {
     private Integer id;
     @NotBlank
-    private String description;
+    private String text;
 
     public Integer getId() {
         return id;
@@ -16,11 +16,11 @@ public class Task {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getText() {
+        return text;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setText(String text) {
+        this.text = text;
     }
 }

@@ -10,4 +10,6 @@ public interface TaskService {
     Collection<Task> getTasks();
 
     void deleteTask(Integer id);
+
+    void deleteAll();
 }

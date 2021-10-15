@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/todo")
+@RequestMapping("todo")
 public class TaskController {
 
     private final TaskService taskService;
@@ -21,11 +21,17 @@ public class TaskController {
     public Task createTask(@Valid @RequestBody Task task){return taskService.saveOrUpdateExisting(task);}
 
     @GetMapping
-    public Collection<Task> getTasks(){return taskService.getTasks();}
+    public Collection<Task> getTasks(){return taskService.getTasks();
+    }
 
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Integer id) {
         taskService.deleteTask(id);
+    }
+
+    @DeleteMapping
+    public void deleteAllTasks() {
+        taskService.deleteAll();
     }
 
 }
