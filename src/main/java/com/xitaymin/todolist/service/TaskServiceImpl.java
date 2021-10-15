@@ -2,12 +2,15 @@ package com.xitaymin.todolist.service;
 
 import com.xitaymin.todolist.dao.TaskDao;
 import com.xitaymin.todolist.entity.Task;
+import com.xitaymin.todolist.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 @Service
 public class TaskServiceImpl implements TaskService {
+    private static final String TASK_NOT_FOUND = "Task with id = %s wasn't found.";
+
     public TaskServiceImpl(TaskDao taskDao) {
         this.taskDao = taskDao;
     }
@@ -25,7 +28,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void deleteTask(Long id) {
-        taskDao.deleteById(id);
+    public void deleteTask(Integer id) {
+
+        if(!taskDao.deleteById(id)) throw new EntityNotFoundException(String.format(TASK_NOT_FOUND,id));
     }
 }

@@ -1,7 +1,6 @@
 package com.xitaymin.todolist.service;
 
 import com.xitaymin.todolist.entity.Task;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
@@ -10,5 +9,5 @@ public interface TaskService {
 
     Collection<Task> getTasks();
 
-    void deleteTask(Long id);
+    void deleteTask(Integer id);
 }

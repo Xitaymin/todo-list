@@ -11,5 +11,5 @@ public interface TaskDao {
 
     Collection<Task> findAll();
 
-    boolean deleteById(Long id);
+    boolean deleteById(Integer id);
 }
