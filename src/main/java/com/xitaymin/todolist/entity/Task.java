@@ -4,23 +4,23 @@ import javax.validation.constraints.NotBlank;
 
 
 public class Task {
-    private Long id;
+    private Integer id;
     @NotBlank
-    private String text;
+    private String description;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getDescription() {
+        return description;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

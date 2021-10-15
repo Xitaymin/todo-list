@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 public interface TaskService {
-    Task saveOrUpdateExisting();
+    Task saveOrUpdateExisting(Task task);
 
     Collection<Task> getTasks();
 

@@ -18,7 +18,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public Task createTask(@Valid @RequestBody Task task){return taskService.saveOrUpdateExisting();}
+    public Task createTask(@Valid @RequestBody Task task){return taskService.saveOrUpdateExisting(task);}
 
     @GetMapping
     public Collection<Task> getTasks(){return taskService.getTasks();}

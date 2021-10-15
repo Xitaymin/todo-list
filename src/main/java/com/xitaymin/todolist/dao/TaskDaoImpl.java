@@ -7,8 +7,9 @@ import java.util.Collection;
 
 @Repository
 public class TaskDaoImpl implements TaskDao {
+
     @Override
-    public Task upsert() {
+    public Task upsert(Task task) {
         return null;
     }
 

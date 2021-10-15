@@ -15,8 +15,8 @@ public class TaskServiceImpl implements TaskService {
     private final TaskDao taskDao;
 
     @Override
-    public Task saveOrUpdateExisting() {
-        return taskDao.upsert();
+    public Task saveOrUpdateExisting(Task task) {
+        return taskDao.upsert(task);
     }
 
     @Override

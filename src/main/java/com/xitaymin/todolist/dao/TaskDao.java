@@ -7,7 +7,7 @@ import java.util.Collection;
 
 @Repository
 public interface TaskDao {
-    Task upsert();
+    Task upsert(Task task);
 
     Collection<Task> findAll();
 
