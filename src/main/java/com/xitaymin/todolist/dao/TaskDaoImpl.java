@@ -16,6 +16,11 @@ import static com.xitaymin.todolist.service.TaskServiceImpl.TASK_NOT_FOUND;
 
 @Repository
 public class TaskDaoImpl implements TaskDao {
+    @Override
+    public void deleteAll() {
+        jdbcTemplate.update("SELECT * FROM tasks");
+    }
+
     private static final RowMapper<Task> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Task.class);
     private final JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert taskInsert;

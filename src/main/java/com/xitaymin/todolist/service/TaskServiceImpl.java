@@ -11,6 +11,7 @@ import java.util.Collection;
 public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteAll() {
+        taskDao.deleteAll();
 
     }
 
