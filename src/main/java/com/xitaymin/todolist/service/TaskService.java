@@ -11,5 +11,4 @@ public interface TaskService {
 
     void deleteTask(Integer id);
 
-    void deleteAll();
 }

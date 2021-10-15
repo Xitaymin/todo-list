@@ -1,6 +1,7 @@
 package com.xitaymin.todolist.entity;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 
 public class Task {
@@ -22,5 +23,18 @@ public class Task {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return text.equals(task.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(text);
     }
 }

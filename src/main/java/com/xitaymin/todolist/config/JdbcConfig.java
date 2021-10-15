@@ -9,10 +9,8 @@ import javax.sql.DataSource;
 
 @Configuration
 public class JdbcConfig {
-    //todo use constants
     @Bean
     DataSource dataSource(){
-//        DataSource dataSource = new SingleConnectionDataSource("jdbc:postgresql://localhost:5432/todo_list","root","JA6k9Zw",false);
         DriverManagerDataSource dataSource = new SingleConnectionDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:5432/todo_list");
