@@ -1,8 +1,8 @@
-package com.xitaymin.todolist.model.service;
+package com.xitaymin.todolist.service;
 
 import com.xitaymin.todolist.dao.TaskDao;
 import com.xitaymin.todolist.entity.Task;
-import com.xitaymin.todolist.model.exceptions.NotFoundResourceException;
+import com.xitaymin.todolist.service.exceptions.NotFoundResourceException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

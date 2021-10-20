@@ -1,7 +1,7 @@
 package com.xitaymin.todolist.dao;
 
 import com.xitaymin.todolist.entity.Task;
-import com.xitaymin.todolist.model.exceptions.NotFoundResourceException;
+import com.xitaymin.todolist.service.exceptions.NotFoundResourceException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
-import static com.xitaymin.todolist.model.service.TaskServiceImpl.TASK_NOT_FOUND;
+import static com.xitaymin.todolist.service.TaskServiceImpl.TASK_NOT_FOUND;
 
 @Repository
 public class TaskDaoImpl implements TaskDao {

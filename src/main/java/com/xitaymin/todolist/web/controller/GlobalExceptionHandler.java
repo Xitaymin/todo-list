@@ -1,6 +1,6 @@
 package com.xitaymin.todolist.web.controller;
 
-import com.xitaymin.todolist.model.exceptions.NotFoundResourceException;
+import com.xitaymin.todolist.service.exceptions.NotFoundResourceException;
 import com.xitaymin.todolist.web.dto.ResponseError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
