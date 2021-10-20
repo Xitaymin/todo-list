@@ -32,6 +32,11 @@ public class TaskServiceImpl implements TaskService {
     public void deleteTask(Integer id) {
         if (id == null) {
             taskDao.deleteAll();
-        } else if (!taskDao.deleteById(id)) throw new NotFoundResourceException(String.format(TASK_NOT_FOUND, id));
+            return;
+        }
+        boolean deleted = taskDao.deleteById(id);
+        if (!deleted) {
+            throw new NotFoundResourceException(String.format(TASK_NOT_FOUND, id));
+        }
     }
 }

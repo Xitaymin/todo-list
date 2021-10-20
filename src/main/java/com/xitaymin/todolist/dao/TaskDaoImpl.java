@@ -19,13 +19,12 @@ public class TaskDaoImpl implements TaskDao {
     private static final RowMapper<Task> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Task.class);
     private final JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert taskInsert;
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate template;
 
-    public TaskDaoImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public TaskDaoImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate template) {
         this.jdbcTemplate = jdbcTemplate;
-        this.taskInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("tasks")
-                .usingGeneratedKeyColumns("id");
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+        this.taskInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("tasks").usingGeneratedKeyColumns("id");
+        this.template = template;
     }
 
     @Override
@@ -41,8 +40,7 @@ public class TaskDaoImpl implements TaskDao {
             task.setId(newKey.intValue());
             return task;
         } else {
-            int affected = namedParameterJdbcTemplate.update("UPDATE tasks SET text=:text WHERE id=:id",
-                    parameterSource);
+            int affected = template.update("UPDATE tasks SET text=:text WHERE id=:id", parameterSource);
             if (affected == 0) {
                 throw new NotFoundResourceException(String.format(TASK_NOT_FOUND, task.getId()));
             }
