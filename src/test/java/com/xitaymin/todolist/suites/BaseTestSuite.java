@@ -25,7 +25,7 @@ public abstract class BaseTestSuite {
     @Autowired
     protected MockMvc mockMvc;
     @Autowired
-    private TaskDao taskDao;
+    protected TaskDao taskDao;
 
     public String asJson(Object object) throws Exception {
         return OBJECT_MAPPER.writer().withDefaultPrettyPrinter().writeValueAsString(object);

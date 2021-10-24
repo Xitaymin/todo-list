@@ -9,6 +9,14 @@ public class Task {
     @NotBlank
     private String text;
 
+    public Task() {
+    }
+
+    public Task(Integer id, @NotBlank String text) {
+        this.id = id;
+        this.text = text;
+    }
+
     public Integer getId() {
         return id;
     }
