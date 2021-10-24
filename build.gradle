@@ -4,6 +4,8 @@ plugins {
 	id 'java'
 }
 
+apply from: './versions.gradle'
+
 group = 'com.xitaymin'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
@@ -19,6 +21,9 @@ dependencies {
 
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation "org.testcontainers:testcontainers:${versions.testcontainers}"
+	testImplementation "org.testcontainers:junit-jupiter:${versions.testcontainers}"
+	testImplementation "org.testcontainers:postgresql:${versions.testcontainers}"
 }
 
 test {
