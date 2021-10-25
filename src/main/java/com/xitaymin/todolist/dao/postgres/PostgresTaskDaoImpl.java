@@ -1,5 +1,6 @@
-package com.xitaymin.todolist.dao;
+package com.xitaymin.todolist.dao.postgres;
 
+import com.xitaymin.todolist.dao.TaskDao;
 import com.xitaymin.todolist.entity.Task;
 import com.xitaymin.todolist.service.exceptions.NotFoundResourceException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -15,13 +16,13 @@ import java.util.Collection;
 import static com.xitaymin.todolist.service.TaskServiceImpl.TASK_NOT_FOUND;
 
 @Repository
-public class TaskDaoImpl implements TaskDao {
+public class PostgresTaskDaoImpl implements TaskDao {
     private static final RowMapper<Task> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Task.class);
     private final JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert taskInsert;
     private final NamedParameterJdbcTemplate template;
 
-    public TaskDaoImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate template) {
+    public PostgresTaskDaoImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate template) {
         this.jdbcTemplate = jdbcTemplate;
         this.taskInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("tasks").usingGeneratedKeyColumns("id");
         this.template = template;
