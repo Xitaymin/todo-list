@@ -3,6 +3,7 @@ version: '3'
 services:
   postgres:
     image: postgres:latest
+    profiles: ["postgres"]
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
       timeout: 45s
@@ -19,3 +20,27 @@ services:
       - ./docker/db-init:/docker-entrypoint-initdb.d/
     ports:
       - 5432:5432
+  mysql:
+    image: mysql:latest
+    profiles: [mysql]
+      restart: always
+      environment:
+        MYSQL_DATABASE: 'todo_list'
+        # So you don't have to use root, but you can if you like
+        MYSQL_USER: 'todo_list_user'
+        # You can use whatever password you like
+        MYSQL_PASSWORD: 'JA6k9Zw'
+        # Password for root access
+        MYSQL_ROOT_PASSWORD: 'password'
+      ports:
+        # <Port exposed> : < MySQL Port running inside container>
+        - '3306:3306'
+      expose:
+        # Opens port 3306 on the container
+        - '3306'
+        # Where our data will be persisted
+      volumes:
+        - ./docker/mysql-db-init:/docker-entrypoint-initdb.d/
+    # Names our volume
+    volumes:
+      my-db:
