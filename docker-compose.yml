@@ -1,42 +1,73 @@
-version: '3'
-
+---
 services:
   postgres:
-    image: postgres:latest
-    profiles: ["postgres"]
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
-      timeout: 45s
-      interval: 10s
-      retries: 10
-    restart: always
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=password
       - APP_DB_USER=todo_list_user
       - APP_DB_PASS=JA6k9Zw
       - APP_DB_NAME=todo_list
-    volumes:
-      - ./docker/db-init:/docker-entrypoint-initdb.d/
+    image: "postgres:latest"
     ports:
-      - 5432:5432
+      - "5432:5432"
+    profiles:
+      - postgres
+    volumes:
+      - ./docker/postgres-db-init:/docker-entrypoint-initdb.d/
+
   mysql:
-    image: mysql:latest
-    profiles: ["mysql"]
-      restart: always
-      environment:
-        MYSQL_DATABASE: 'todo_list'
-        MYSQL_USER: 'todo_list_user'
-        MYSQL_PASSWORD: 'JA6k9Zw'
-        MYSQL_ROOT_PASSWORD: 'password'
-      ports:
-        - '3306:3306'
-      expose:
-        # Opens port 3306 on the container
-        - '3306'
-        # Where our data will be persisted
-      volumes:
-        - ./docker/mysql-db-init:/docker-entrypoint-initdb.d/
-    # Names our volume
+    environment:
+      MYSQL_DATABASE: 'todo_list'
+      MYSQL_PASSWORD: 'JA6k9Zw'
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_USER: 'todo_list_user'
+    image: "mysql:latest"
+    ports:
+      - "3306:3306"
+    profiles:
+      - mysql
+    volumes:
+      - ./docker/mysql-db-init:/docker-entrypoint-initdb.d/
+version: "3.9"
+
+#add healthcheck for both containers
+
+#version: '3.9'
+
+#services:
+#  postgres:
+#    image:
+#    postgres :latest
+#    profiles: ["postgres"]
+#    healthcheck:
+#      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+#      timeout: 45s
+#      interval: 10s
+#      retries: 10
+#    restart: always
+#    environment:
+#      - POSTGRES_USER=root
+#      - POSTGRES_PASSWORD=password
+#      - APP_DB_USER=todo_list_user
+#      - APP_DB_PASS=JA6k9Zw
+#      - APP_DB_NAME=todo_list
 #    volumes:
-#      my-db:
+#      - ./docker/db-init:/docker-entrypoint-initdb.d/
+#    ports:
+#      - 5432:5432
+#  mysql:
+#    image:
+#    mysql :latest
+#    profiles: ["mysql"]
+#      restart: always
+#      environment:
+#        MYSQL_DATABASE: 'todo_list'
+#        MYSQL_USER: 'todo_list_user'
+#        MYSQL_PASSWORD: 'JA6k9Zw'
+#        MYSQL_ROOT_PASSWORD: 'password'
+#      ports:
+#        - '3306:3306'
+#      expose:
+#        - '3306'
+#      volumes:
+#        - ./docker/mysql-db-init:/docker-entrypoint-initdb.d/
