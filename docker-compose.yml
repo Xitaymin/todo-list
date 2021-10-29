@@ -16,11 +16,12 @@ services:
       - ./docker/postgres-db-init:/docker-entrypoint-initdb.d/
 
   mysql:
+    restart: always
     environment:
-      MYSQL_DATABASE: 'todo_list'
-      MYSQL_PASSWORD: 'JA6k9Zw'
-      MYSQL_ROOT_PASSWORD: 'password'
-      MYSQL_USER: 'todo_list_user'
+      - MYSQL_DATABASE=todo_list
+      - MYSQL_PASSWORD=JA6k9Zw
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=todo_list_user
     image: "mysql:latest"
     ports:
       - "3306:3306"
