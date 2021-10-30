@@ -10,7 +10,8 @@ import java.util.Map;
 
 
 public class MySql {
-    public static final MySQLContainer<?> CONTAINER = new MySQLContainer<>("mysql:8.0.27");
+    public static final MySQLContainer<?> CONTAINER =
+            new MySQLContainer<>("mysql:8.0.27").withInitScript("schema-mysql.sql");
 
     public static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
         @Override

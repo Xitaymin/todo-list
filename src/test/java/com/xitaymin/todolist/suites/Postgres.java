@@ -3,15 +3,16 @@ package com.xitaymin.todolist.suites;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.MapPropertySource;
-import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.lifecycle.Startables;
 
 import java.util.Map;
 
-@ActiveProfiles("postgres")
 public class Postgres {
-    public static final PostgreSQLContainer<?> CONTAINER = new PostgreSQLContainer<>("postgres:13.4");
+
+    public static final PostgreSQLContainer<?> CONTAINER =
+            new PostgreSQLContainer<>("postgres:13.4").withInitScript("schema-postgresql.sql");
+
 
     public static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
         @Override
@@ -21,9 +22,12 @@ public class Postgres {
             context.getEnvironment()
                     .getPropertySources()
                     .addFirst(new MapPropertySource("testcontainers",
-                            Map.of("spring.datasource.url", CONTAINER.getJdbcUrl(),
-                                    "spring.datasource.username", CONTAINER.getUsername(),
-                                    "spring.datasource.password", CONTAINER.getPassword())));
+                            Map.of("spring.datasource.url",
+                                    CONTAINER.getJdbcUrl(),
+                                    "spring.datasource.username",
+                                    CONTAINER.getUsername(),
+                                    "spring.datasource.password",
+                                    CONTAINER.getPassword())));
         }
     }
 }
