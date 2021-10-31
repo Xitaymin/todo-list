@@ -10,23 +10,23 @@ import java.util.Map;
 
 
 public class MySql {
-    public static final MySQLContainer<?> CONTAINER =
+    private static final MySQLContainer<?> container =
             new MySQLContainer<>("mysql:8.0.27").withInitScript("schema-mysql.sql");
 
     public static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
         @Override
         public void initialize(ConfigurableApplicationContext context) {
-            Startables.deepStart(CONTAINER).join();
+            Startables.deepStart(container).join();
 
             context.getEnvironment()
                     .getPropertySources()
                     .addFirst(new MapPropertySource("testcontainers",
                             Map.of("spring.datasource.url",
-                                    CONTAINER.getJdbcUrl(),
+                                    container.getJdbcUrl(),
                                     "spring.datasource.username",
-                                    CONTAINER.getUsername(),
+                                    container.getUsername(),
                                     "spring.datasource.password",
-                                    CONTAINER.getPassword())));
+                                    container.getPassword())));
         }
     }
 }

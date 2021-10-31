@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest(classes = TestSuiteConfiguration.class)
 @AutoConfigureMockMvc
-//@ContextConfiguration(initializers = Postgres.Initializer.class)
-@ContextConfiguration(initializers = MySql.Initializer.class)
-@ActiveProfiles("mysql")
+@ContextConfiguration(initializers = Postgres.Initializer.class)
+//@ContextConfiguration(initializers = MySql.Initializer.class)
+@ActiveProfiles("postgres")
 @Transactional
 public abstract class BaseTestSuite {
 

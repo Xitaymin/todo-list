@@ -28,9 +28,8 @@ public class TaskTestSuite extends BaseTestSuite {
     void notFoundTest() throws Exception {
         isTaskListEmptyBeforeCreationTest();
         String absentId = "1";
-        MvcResult mvcResult = mockMvc.perform(delete("/todo").param("id", absentId))
-                .andExpect(status().isNotFound())
-                .andReturn();
+        MvcResult mvcResult =
+                mockMvc.perform(delete("/todo").param("id", absentId)).andExpect(status().isNotFound()).andReturn();
 
         ResponseError responseError = fromResponse(mvcResult, ResponseError.class);
         assertThat(responseError.getMessage()).isEqualTo(String.format(TASK_NOT_FOUND, absentId));
@@ -54,9 +53,8 @@ public class TaskTestSuite extends BaseTestSuite {
         assertNotNull(response.getId());
         assertEquals(response, request);
 
-        MvcResult resultAfterSave = mockMvc.perform(get("/todo").accept(APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
+        MvcResult resultAfterSave =
+                mockMvc.perform(get("/todo").accept(APPLICATION_JSON)).andExpect(status().isOk()).andReturn();
         Task[] allTasksAfterSave = fromResponse(resultAfterSave, Task[].class);
         Task taskAfterSave = allTasksAfterSave[0];
 
@@ -81,9 +79,8 @@ public class TaskTestSuite extends BaseTestSuite {
         assertEquals(request.getId(), response.getId());
         assertEquals(response, request);
 
-        MvcResult resultAfterSave = mockMvc.perform(get("/todo").accept(APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
+        MvcResult resultAfterSave =
+                mockMvc.perform(get("/todo").accept(APPLICATION_JSON)).andExpect(status().isOk()).andReturn();
         Task[] allTasksAfterSave = fromResponse(resultAfterSave, Task[].class);
 
         assertEquals(allTasksAfterSave.length, 1);
@@ -103,9 +100,8 @@ public class TaskTestSuite extends BaseTestSuite {
 
         mockMvc.perform(delete("/todo").param("id", String.valueOf(firstTask.getId()))).andExpect(status().isOk());
 
-        MvcResult resultAfterSave = mockMvc.perform(get("/todo").accept(APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
+        MvcResult resultAfterSave =
+                mockMvc.perform(get("/todo").accept(APPLICATION_JSON)).andExpect(status().isOk()).andReturn();
         Task[] allTasksAfterSave = fromResponse(resultAfterSave, Task[].class);
 
         assertEquals(allTasksAfterSave.length, 1);
@@ -119,8 +115,8 @@ public class TaskTestSuite extends BaseTestSuite {
     public void deleteAllTasks() throws Exception {
         isTaskListEmptyBeforeCreationTest();
 
-        Task savedTask = taskDao.upsert(new Task(null, "First task"));
-        Task secondTask = taskDao.upsert(new Task(null, "Second task"));
+        taskDao.upsert(new Task(null, "First task"));
+        taskDao.upsert(new Task(null, "Second task"));
 
         mockMvc.perform(delete("/todo")).andExpect(status().isOk());
 

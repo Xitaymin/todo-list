@@ -1,14 +1,7 @@
 #!/bin/bash
 set -e
-#mysql -u root password $MYSQL_ROOT_PASSWORD -e "
-#mysql -uroot -proot -e "
-#mysql -h 127.0.0.1 -u root -P 3306 -p $MYSQL_ROOT_PASSWORD -e
-#mysqladmin --user root --password $MYSQL_ROOT_PASSWORD
-#mysql -u root -execute"
-#CREATE USER $MYSQL_USER WITH ENCRYPTED PASSWORD $MYSQL_PASSWORD;
 mysql --user=root --password=$MYSQL_ROOT_PASSWORD --execute "
 CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;
 CREATE USER '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';
 GRANT ALL PRIVILEGES ON  $MYSQL_DATABASE.* TO '$MYSQL_USER'@'localhost';
 FLUSH PRIVILEGES;"
-#GRANT ALL PRIVILEGES ON DATABASE $MYSQL_DATABASE TO $MYSQL_USER;"
