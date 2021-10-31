@@ -1,7 +1,0 @@
-CREATE SEQUENCE IF NOT EXISTS global_sec START WITH 1;
-
-CREATE TABLE IF NOT EXISTS tasks
-(
-    id   INTEGER PRIMARY KEY DEFAULT nextval('global_sec'),
-    text VARCHAR
-);

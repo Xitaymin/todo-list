@@ -3,6 +3,7 @@ package com.xitaymin.todolist.suites;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.MapPropertySource;
+import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.lifecycle.Startables;
 
@@ -13,15 +14,15 @@ public class Postgres {
     public static final PostgreSQLContainer<?> CONTAINER =
             new PostgreSQLContainer<>("postgres:13.4").withInitScript("schema-postgresql.sql");
 
+    JdbcDatabaseContainer<?> container;
+
 
     public static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
         @Override
         public void initialize(ConfigurableApplicationContext context) {
             Startables.deepStart(CONTAINER).join();
 
-            context.getEnvironment()
-                    .getPropertySources()
-                    .addFirst(new MapPropertySource("testcontainers",
+            context.getEnvironment().getPropertySources().addFirst(new MapPropertySource("testcontainers",
                             Map.of("spring.datasource.url",
                                     CONTAINER.getJdbcUrl(),
                                     "spring.datasource.username",
